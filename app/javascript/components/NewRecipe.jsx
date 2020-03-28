@@ -40,8 +40,8 @@ class NewRecipe extends React.Component {
       instruction: instruction.replace(/\n/, '<br> <br>')
     }
 
+    const token = document.querySelector("meta[name='csrf-token']").content;
     debugger
-    const token = document.querySelector("meta[name='csrf-token']");
     fetch(url, {
       method: 'POST',
       headers: {
