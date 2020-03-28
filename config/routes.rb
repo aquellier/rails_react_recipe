@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
-    namespace :v1 do
-      get 'recipes/index'
-      post 'recipes/create'
-      get '/show/:id', to: 'recipes#show'
-      delete '/destroy/:id', to: 'recipes#destroy'
+    namespace :v1 , default: { format: 'json' } do
+      resources :ingredients
+    end
+  end
+  namespace :api do
+    namespace :v1 , default: { format: 'json' } do
+      resources :recipes
     end
   end
   root 'homepage#index'
