@@ -33,8 +33,9 @@ module TotoKitchen
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :options]
+        origins 'localhost:3000', 'localhost:5000'
+
+        resource '*', headers: :any, methods: [:get, :delete, :post, :options]
       end
     end
 

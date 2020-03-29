@@ -5,6 +5,7 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create
+    byebug
     recipe = Recipe.create!(recipe_params)
     if recipe
       render json: recipe
@@ -23,7 +24,6 @@ class Api::V1::RecipesController < ApplicationController
 
   def destroy
     recipe&.destroy
-    render json: { message: 'Recipe deleted!' }
   end
 
   private
