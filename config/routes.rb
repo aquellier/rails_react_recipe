@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'registrations/create'
   devise_for :users,
              path: '',
              path_names: {
