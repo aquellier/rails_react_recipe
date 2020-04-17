@@ -35,7 +35,8 @@ module TotoKitchen
       allow do
         origins 'localhost:3000', 'localhost:5000'
 
-        resource '*', headers: :any, methods: [:get, :delete, :post, :options]
+        resource '*', headers: :any, expose: ["Authorization"],
+        methods: [:get, :patch, :put, :delete, :post, :options, :show]
       end
     end
 

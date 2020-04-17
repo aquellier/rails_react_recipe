@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'registrations/create'
   devise_for :users,
              path: '',
              path_names: {
@@ -9,16 +8,13 @@ Rails.application.routes.draw do
                registration: 'signup'
              },
              controllers: {
-               sessions: 'sessions',
-               registrations: 'registrations'
+               registrations: 'registrations',
+               sessions: 'sessions'
              }
+
   namespace :api do
     namespace :v1 , default: { format: 'json' } do
       resources :ingredients
-    end
-  end
-  namespace :api do
-    namespace :v1 , default: { format: 'json' } do
       resources :recipes
     end
   end
