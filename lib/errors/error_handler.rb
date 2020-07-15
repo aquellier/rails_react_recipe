@@ -1,24 +1,19 @@
 module Errors
   module ErrorHandler
-    def self.included(klass)
-      klass.class_eval do
-        rescue_from StandardError do |e|
-          respond(:standard_error, 500, e.to_s)
-        end
-        rescue_from ActiveRecord::RecordNotFound do |e|
-          respond(:record_not_found, 404, e.to_s)
-        end
+    extend ActiveSupport::Concern
+
+      included do
         rescue_from ActiveRecord::RecordInvalid do |e|
-          respond(:unprocessable_entity, 422, e.to_s)
+          status = 422
+          json = Invalid.new(status, :record_invalid, e.to_s, self.request.fullpath).to_json
+          respond(json, status)
         end
       end
-    end
 
     private
 
-    def respond(_error, _status, _message)
-      json = Helpers::Render.json(_error, _status, _message)
-      render json: json
+    def respond(json, status)
+      render json: json, status: status
     end
   end
 end
